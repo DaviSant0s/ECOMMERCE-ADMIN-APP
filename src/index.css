@@ -1,0 +1,14 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", serif;
+    font-weight: 400;
+    color: #101214;
+}
+
+:root {
+    --headerBackgroundColor: #353942;
+    --headerColor: rgb(247, 247, 247);
+    --homeBackgroundColor: #E8EAEE;
+}
