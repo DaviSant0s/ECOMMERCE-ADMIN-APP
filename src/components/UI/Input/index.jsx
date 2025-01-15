@@ -4,7 +4,7 @@ export default function Input({ htmlFor, label, type, id, placeholder, errorMess
   return (
     <div className='inputContainer'>
         <label htmlFor={htmlFor}>{label}</label>
-        <input type={type} id={id} value={value} onChange={onChange} placeholder={placeholder} />
+        <input type={type} value={value} id={id} onChange={onChange} placeholder={placeholder} />
 
         { errorMessage && 
             <small>{errorMessage}</small>
