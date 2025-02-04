@@ -4,7 +4,6 @@ import ButtonForm from '../../components/UI/ButtonForm';
 import Input from '../../components/UI/Input';
 import { useAuth } from '../../context/authContext/authProvider';
 import './styles.css';
-import { isUserLoggedIn, login } from '../../api/authApi';
 import { useNavigate } from 'react-router-dom';
 
 export default function Signin() {
@@ -12,14 +11,6 @@ export default function Signin() {
   const [ password, setPassword ] = useState('');
   const { state, dispatch } = useAuth();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    
-    if(!state.authenticate){
-      isUserLoggedIn(dispatch);
-    }
-
-  }, []);
 
   const userLogin = (e) => {
 
@@ -35,8 +26,10 @@ export default function Signin() {
   }
 
   useEffect(() => {
-    navigate('/');
-  }, [])
+    if(state.authenticate){
+      navigate('/');
+    }
+  })
 
   return (
       <Layout>

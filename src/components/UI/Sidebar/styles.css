@@ -1,0 +1,34 @@
+/* Sidebar styles */
+  .sidebar {
+    width: var(--widthSideBar);
+    height: 100%;
+    background-color: var(--backgroundSidebar);
+    padding: 20px;
+
+    box-shadow: var(--boxShadowSidebar);
+
+    flex-shrink: 0;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+  }
+  
+  .sidebar li {
+    margin: 20px 0;
+  }
+  
+  .sidebar a {
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .sidebar a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Content styles */
+  .content {
+    margin-left: 220px; /* To avoid overlap with sidebar */
+    padding: 20px;
+  }

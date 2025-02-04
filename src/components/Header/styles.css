@@ -4,8 +4,8 @@
     align-items: center;
 
     width: 100%;
-    height: 50px;
-    padding: 0 100px 0 100px;
+    height: var(--heightHeader); 
+    padding: 0 45px 0 45px;
 
     background-color: var(--headerBackgroundColor);
 
@@ -18,13 +18,13 @@
     text-decoration: none; 
 }
 
-.link {
+.link, .signout-btn {
     color: rgb(149, 149, 149);
     font-weight: 600;
     cursor: pointer;
     transition: all 0.1s ease-in-out;
 }
 
-.link:hover{
+.link:hover, .signout-btn:hover{
     color: var(--headerColor);
 }

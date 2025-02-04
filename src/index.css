@@ -11,4 +11,8 @@
     --headerBackgroundColor: #353942;
     --headerColor: rgb(247, 247, 247);
     --homeBackgroundColor: #E8EAEE;
+    --heightHeader: 50px;
+    --widthSideBar: 250px;
+    --boxShadowSidebar: inset 0 0 2px gray;
+    --backgroundSidebar: #eee;
 }
