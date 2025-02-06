@@ -8,7 +8,7 @@ export default function PrivateRoute({element: Component}) {
 
     useEffect(() => {
 
-        if(!token) navigate('/signin');
+      if(!token) navigate('/signin');
 
     }, [token, navigate]);
 

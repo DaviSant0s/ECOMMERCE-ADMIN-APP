@@ -5,6 +5,7 @@ import Input from '../../components/UI/Input';
 import { useAuth } from '../../context/authContext/authProvider';
 import './styles.css';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../../api/authApi';
 
 export default function Signin() {
   const [ email, setEmail ] = useState('');
@@ -17,7 +18,7 @@ export default function Signin() {
     e.preventDefault();
 
     const userCredentials = {
-        email, password
+      email, password
     }
 
     login(userCredentials, dispatch);
@@ -29,7 +30,7 @@ export default function Signin() {
     if(state.authenticate){
       navigate('/');
     }
-  })
+  });
 
   return (
       <Layout>

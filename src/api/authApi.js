@@ -1,13 +1,13 @@
-import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "../context/authContext/authTypes";
+import * as authTypes from "../context/authContext/authTypes";
 import { postRequest } from "./api"
 
 export const login = async (userCredentials, dispatch) => {
 
-    dispatch({ type: LOGIN_REQUEST });
+    dispatch({ type: authTypes.LOGIN_REQUEST });
 
     try {
 
-        const data = await postRequest('http://localhost:3000/api/signin', userCredentials);
+        const data = await postRequest('http://localhost:3000/api/admin/signin', userCredentials);
 
         if (!data || !data.token || !data.user){
             throw new Error('Invalid response from server');
@@ -18,17 +18,40 @@ export const login = async (userCredentials, dispatch) => {
         localStorage.setItem('token', token);
         localStorage.setItem('user', JSON.stringify(user));
 
-        dispatch({ type: LOGIN_SUCCESS, payload: {
+        dispatch({ type: authTypes.LOGIN_SUCCESS, payload: {
             token,
             user
         }});
 
     } catch (error) {
-        dispatch({ type: LOGIN_FAILURE, payload: { error: error.message }});
+        dispatch({ type: authTypes.LOGIN_FAILURE, payload: { error: error.message }});
     }
 
 }
 
+export const signup = async (userCredentials, dispatch) => {
+
+    dispatch({ type: authTypes.SIGNUP_REQUEST });
+
+    try {
+
+        const data = await postRequest('http://localhost:3000/api/admin/signup', userCredentials);
+
+        if (!data){
+            throw new Error('Invalid response from server');
+        }
+
+        const { message } = data;
+
+        dispatch({ type: authTypes.SIGNUP_SUCCESS, payload: {
+            message
+        }});
+
+    } catch (error) {
+        dispatch({ type: authTypes.SIGNUP_FAILURE, payload: { error: error.message }});
+    }
+
+}
 
 export const isUserLoggedIn = async (dispatch) => {
 
@@ -37,13 +60,29 @@ export const isUserLoggedIn = async (dispatch) => {
     if(token) {
         const user = JSON.parse(localStorage.getItem('user'));
         
-        dispatch({ type: LOGIN_SUCCESS, payload: {
+        dispatch({ type: authTypes.LOGIN_SUCCESS, payload: {
             token,
             user
         }});
 
     } else {
-        dispatch({ type: LOGIN_FAILURE, payload: { error: 'Failed to login' }});
+        dispatch({ type: authTypes.LOGIN_FAILURE, payload: { error: 'Failed to login' }});
+    }
+
+}
+
+export const signout = async ( dispatch ) => {
+    
+    dispatch({ type: authTypes.LOGOUT_REQUEST });
+
+    try {
+        
+        localStorage.clear();
+        dispatch({ type: authTypes.LOGOUT_SUCCESS });
+
+
+    } catch (error) {
+        dispatch({ type: authTypes.LOGOUT_FAILURE, payload: { message: error.message} });
     }
 
 }

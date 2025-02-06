@@ -13,7 +13,7 @@ function App() {
       isUserLoggedIn(dispatch);
     }
 
-  });
+  }, []);
 
   return (
     <div className='appContainer'>
