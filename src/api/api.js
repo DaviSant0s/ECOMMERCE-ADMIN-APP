@@ -9,12 +9,16 @@ const handleResponse = async (response) => {
 }
 
 export const postRequest = async (url, data) => {
+
+    const token = window.localStorage.getItem('token');
+
     try {
-        
+
         const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': token ? `Bearer ${token}` : '' 
             },
 
             body: JSON.stringify(data)

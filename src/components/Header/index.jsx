@@ -6,7 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 export default function Header() {
   const { state, dispatch } = useAuth();
 
-  console.log(state);
+  console.log(state)
   
   const Logout = () => {
     signout(dispatch);

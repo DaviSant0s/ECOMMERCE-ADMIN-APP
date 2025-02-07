@@ -6,7 +6,12 @@ export const authReducer = (state, action) => {
     switch (action.type) {
         // signin
         case authTypes.LOGIN_REQUEST:
-            return { ...state, authenticating: true }
+            return { 
+                ...state, 
+                authenticating: true,
+                error: null,
+                message: '' 
+            }
 
         case authTypes.LOGIN_SUCCESS:
             return { 
@@ -22,27 +27,36 @@ export const authReducer = (state, action) => {
                 ...state, 
                 error: action.payload.error,
                 authenticate: false,
+                authenticating: false,
             }
         
         // logout
         case authTypes.LOGOUT_REQUEST:
-            return { ...state, loading: true}
+            return { 
+                ...state, 
+                loading: true, 
+                error: null,
+                message: ''
+            }
 
         case  authTypes.LOGOUT_SUCCESS:
-            return { ...authInitialState, loading: false }
+            return { ...authInitialState}
         
         case authTypes.LOGOUT_FAILURE:
+            
             return {
                 ...state,
-                error: action.payload.error,
-                loading: false
+                loading: false,
+                error: action.payload.error
             }
 
         // signup
         case authTypes.SIGNUP_REQUEST:
             return { 
                 ...state, 
-                loading: true
+                loading: true,
+                error: null,
+                message: ''
             }
         
         case authTypes.SIGNUP_SUCCESS:

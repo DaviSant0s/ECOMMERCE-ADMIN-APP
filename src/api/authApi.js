@@ -9,6 +9,8 @@ export const login = async (userCredentials, dispatch) => {
 
         const data = await postRequest('http://localhost:3000/api/admin/signin', userCredentials);
 
+        console.log(data)
+
         if (!data || !data.token || !data.user){
             throw new Error('Invalid response from server');
         }
@@ -43,9 +45,7 @@ export const signup = async (userCredentials, dispatch) => {
 
         const { message } = data;
 
-        dispatch({ type: authTypes.SIGNUP_SUCCESS, payload: {
-            message
-        }});
+        dispatch({ type: authTypes.SIGNUP_SUCCESS, payload: {message} });
 
     } catch (error) {
         dispatch({ type: authTypes.SIGNUP_FAILURE, payload: { error: error.message }});
@@ -76,13 +76,15 @@ export const signout = async ( dispatch ) => {
     dispatch({ type: authTypes.LOGOUT_REQUEST });
 
     try {
+
+        const res = await postRequest('http://localhost:3000/api/admin/signout', {});
         
         localStorage.clear();
         dispatch({ type: authTypes.LOGOUT_SUCCESS });
-
-
+        
+        
     } catch (error) {
-        dispatch({ type: authTypes.LOGOUT_FAILURE, payload: { message: error.message} });
+        dispatch({ type: authTypes.LOGOUT_FAILURE, payload: { error: error.message} });
     }
 
 }
