@@ -1,12 +1,14 @@
 import { signout } from '../../api/authApi';
 import { useAuth } from '../../context/authContext/authProvider';
+import { useCategories } from '../../context/categoriesContext/categoriesProvider';
 import './styles.css';
 import { Link, NavLink } from "react-router-dom";
 
 export default function Header() {
   const { state, dispatch } = useAuth();
+  //const { categoryState } = useCategories();
 
-  console.log(state)
+  //console.log(categoryState)
   
   const Logout = () => {
     signout(dispatch);

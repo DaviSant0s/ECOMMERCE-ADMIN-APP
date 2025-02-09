@@ -36,6 +36,8 @@ export const postRequest = async (url, data) => {
 
 export const getRequest = async (url) => {
 
+    const token = window.localStorage.getItem('token');
+
     try {
         const response = await fetch(url);
 

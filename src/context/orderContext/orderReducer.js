@@ -1,38 +1,37 @@
-import { authInitialState } from './authInitialState';
-import * as authTypes from './authTypes';
+import { orderInitialState } from './orderInitialState';
+import * as orderTypes from './orderTypes';
 
-export const authReducer = (state, action) => {
-
+export const orderReducer = (state, action) => {
 
     switch (action.type) {
         // signin
-        case authTypes.LOGIN_REQUEST:
+        case orderTypes.LOGIN_REQUEST:
             return { 
                 ...state, 
-                authenticating: true,
+                orderenticating: true,
                 error: null,
                 message: '' 
             }
 
-        case authTypes.LOGIN_SUCCESS:
+        case orderTypes.LOGIN_SUCCESS:
             return { 
                 ...state, 
                 token: action.payload.token,
                 user: action.payload.user,
-                authenticate: true,
-                authenticating: false,
+                orderenticate: true,
+                orderenticating: false,
             }
         
-        case authTypes.LOGIN_FAILURE:
+        case orderTypes.LOGIN_FAILURE:
             return { 
                 ...state, 
                 error: action.payload.error,
-                authenticate: false,
-                authenticating: false,
+                orderenticate: false,
+                orderenticating: false,
             }
         
         // logout
-        case authTypes.LOGOUT_REQUEST:
+        case orderTypes.LOGOUT_REQUEST:
             return { 
                 ...state, 
                 loading: true, 
@@ -40,10 +39,10 @@ export const authReducer = (state, action) => {
                 message: ''
             }
 
-        case  authTypes.LOGOUT_SUCCESS:
-            return { ...authInitialState}
+        case  orderTypes.LOGOUT_SUCCESS:
+            return { ...orderInitialState}
         
-        case authTypes.LOGOUT_FAILURE:
+        case orderTypes.LOGOUT_FAILURE:
             
             return {
                 ...state,
@@ -52,7 +51,7 @@ export const authReducer = (state, action) => {
             }
 
         // signup
-        case authTypes.SIGNUP_REQUEST:
+        case orderTypes.SIGNUP_REQUEST:
             return { 
                 ...state, 
                 loading: true,
@@ -60,14 +59,14 @@ export const authReducer = (state, action) => {
                 message: ''
             }
         
-        case authTypes.SIGNUP_SUCCESS:
+        case orderTypes.SIGNUP_SUCCESS:
             return { 
                 ...state, 
                 message: action.payload.message,
                 loading: false,
             }
         
-        case authTypes.SIGNUP_FAILURE:
+        case orderTypes.SIGNUP_FAILURE:
             return { 
                 ...state, 
                 error: action.payload.error,
