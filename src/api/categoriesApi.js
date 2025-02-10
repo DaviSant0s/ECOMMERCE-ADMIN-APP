@@ -28,3 +28,24 @@ export const getAllCategories = async (dispatch) => {
 
 }
 
+export const createCategories = async (categoryData, dispatch) => {
+
+    dispatch({ type: categoriesTypes.CREATE_CATEGORIES_REQUEST});
+
+    try {
+
+        const res = await postRequest('http://localhost:3000/api/category/create', categoryData);
+
+        dispatch({ type: categoriesTypes.CREATE_CATEGORIES_SUCCESS });
+        
+    } catch (error) {
+
+        dispatch({ 
+            type: categoriesTypes.CREATE_CATEGORIES_FAILURE, 
+            payload: { error: error.message }
+        });
+        
+    }
+
+}
+

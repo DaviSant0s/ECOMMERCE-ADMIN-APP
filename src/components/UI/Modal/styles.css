@@ -1,0 +1,39 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+
+}
+  
+.modal {
+  position: absolute;
+  top: 100px;
+
+  background: white;
+  width: 800px;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+.close-icon-modal {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+
+  border-radius: 50%;
+  padding: 4px;
+  font-size: 2.5em;
+  fill: rgb(0, 0, 0);
+  cursor: pointer;
+
+}
+
+.close-icon-modal:hover {
+  background-color: rgb(233, 233, 233);
+  fill: rgb(162, 50, 50);
+}
