@@ -34,6 +34,31 @@ export const postRequest = async (url, data) => {
 }
 
 
+export const postFormDataRequest = async (url, formData) => {
+
+    const token = window.localStorage.getItem('token');
+
+    try {
+
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': token ? `Bearer ${token}` : '' 
+            },
+
+            body: formData
+        });
+
+        return await handleResponse(response);
+
+    } catch (error) {
+
+        throw new Error(error.message);
+        
+    }
+}
+
+
 export const getRequest = async (url) => {
 
     const token = window.localStorage.getItem('token');

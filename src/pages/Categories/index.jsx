@@ -30,8 +30,8 @@ export default function Categories() {
       form.append("categoryImage", categoryImage);
   
       createCategories(form, categoryDispatch);
-      
-      getAllCategories(categoryDispatch);
+
+      setIsModalOpen(false);
   }
 
   const renderCategories = (categories) => {

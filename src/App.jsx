@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import './App.css'
 import { RoutesApp } from './routes'
 import { useAuth } from './context/authContext/authProvider';
 import { isUserLoggedIn } from './api/authApi';

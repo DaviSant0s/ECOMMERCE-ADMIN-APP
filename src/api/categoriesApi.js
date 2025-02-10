@@ -1,5 +1,5 @@
 import * as categoriesTypes from "../context/categoriesContext/categoriesTypes";
-import { postRequest, getRequest } from "./api";
+import { postRequest, getRequest, postFormDataRequest } from "./api";
 
 
 export const getAllCategories = async (dispatch) => {
@@ -34,7 +34,7 @@ export const createCategories = async (categoryData, dispatch) => {
 
     try {
 
-        const res = await postRequest('http://localhost:3000/api/category/create', categoryData);
+        const res = await postFormDataRequest('http://localhost:3000/api/category/create', categoryData);
 
         dispatch({ type: categoriesTypes.CREATE_CATEGORIES_SUCCESS });
         
