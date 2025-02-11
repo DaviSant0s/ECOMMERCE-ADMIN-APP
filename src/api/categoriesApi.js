@@ -34,9 +34,12 @@ export const createCategories = async (categoryData, dispatch) => {
 
     try {
 
-        const res = await postFormDataRequest('http://localhost:3000/api/category/create', categoryData);
+        const data = await postFormDataRequest('http://localhost:3000/api/category/create', categoryData);
 
-        dispatch({ type: categoriesTypes.CREATE_CATEGORIES_SUCCESS });
+        dispatch({ 
+            type: categoriesTypes.CREATE_CATEGORIES_SUCCESS,
+            payload: { category: data.category }
+        });
         
     } catch (error) {
 
