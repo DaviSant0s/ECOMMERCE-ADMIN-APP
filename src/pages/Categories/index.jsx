@@ -62,7 +62,6 @@ export default function Categories() {
     return options;
 
   }
-
   const handleCategoryImage = (e) => {
     setCategoryImage(e.target.files[0]);
   }

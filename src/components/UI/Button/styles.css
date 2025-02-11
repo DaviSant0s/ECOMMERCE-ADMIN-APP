@@ -1,11 +1,10 @@
 .custom-button {
     background-color: #eeeeee;
     color: black;
-    border: 1px solid rgba(0, 0, 0, 0.429);
+    border: 3px solid rgba(0, 0, 0, 0.532);
     padding: 10px 30px;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 5px;
   }
   
   .custom-button:hover {
