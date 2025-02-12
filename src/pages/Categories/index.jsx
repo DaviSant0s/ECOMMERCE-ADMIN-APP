@@ -93,13 +93,9 @@ export default function Categories() {
             <select onChange={e => setParentCategoryId(e.target.value)}>
               <option value="">Selecione uma categoria</option>
 
-              {
-              
-                createCategoriesList(categoryState.categories).map(category => (
+              {createCategoriesList(categoryState.categories).map(category => (
                   <option key={category.value} value={category.value}>{category.name}</option>
-                ))
-              
-              }
+              ))}
  
             </select>
 
