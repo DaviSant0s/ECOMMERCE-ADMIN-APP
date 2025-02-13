@@ -1,5 +1,5 @@
 .product-container {
-    width: 100%;
+    width: fit-content;
     height: 100%;
     padding-left: 2em;
     padding-right: 2em;
@@ -42,4 +42,32 @@
 
 .line-modal {
     color: rgb(233, 233, 233);
+}
+
+.table-container{
+    margin-top: 30px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 1000px;
+}
+
+table tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.196);
+}
+
+table th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+table > thead > tr {
+    border-top: 1.5px solid rgba(0, 0, 0, 0.196);
+    border-bottom: 3px solid rgba(0, 0, 0, 0.196);
+}
+
+th {
+    background-color: #f2f2f2;
+    font-weight: 700;
 }

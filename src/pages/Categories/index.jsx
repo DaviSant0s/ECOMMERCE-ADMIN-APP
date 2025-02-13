@@ -1,7 +1,7 @@
 import './styles.css';
 import Layout from '../../components/Layout'
-import { useEffect, useState } from 'react';
-import { createCategories, getAllCategories } from '../../api/categoriesApi';
+import { useState } from 'react';
+import { createCategories } from '../../api/categoriesApi';
 import { useCategories } from '../../context/categoriesContext/categoriesProvider';
 import Modal from '../../components/UI/Modal';
 import Button from '../../components/UI/Button';
@@ -14,10 +14,6 @@ export default function Categories() {
   const [categoryImage, setCategoryImage] = useState('');
 
   const { categoryState, categoryDispatch } = useCategories();
-
-  useEffect(() => {
-    getAllCategories(categoryDispatch);
-  }, []);
 
   const createCategory = (e) => {
     

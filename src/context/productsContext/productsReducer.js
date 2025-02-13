@@ -37,9 +37,13 @@ export const productsReducer = (state, action) => {
 
         case productsTypes.CREATE_PRODUCTS_SUCCESS:
 
+            const product = action.payload.product;
+            const updatedProducts = state.products;
+            updatedProducts.push(product);
+
             return { 
                 ...state, 
-                products: action.payload.products,
+                products: updatedProducts,
                 loading: false
             }
         

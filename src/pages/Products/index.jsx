@@ -5,7 +5,6 @@ import Button from '../../components/UI/Button';
 import { useProducts } from '../../context/productsContext/productsProvider';
 import { useCategories } from '../../context/categoriesContext/categoriesProvider';
 import { useEffect, useState } from 'react';
-import { getAllCategories } from '../../api/categoriesApi';
 import { createProducts } from '../../api/productsApi';
 
 export default function Products() {
@@ -20,14 +19,9 @@ export default function Products() {
   const [productPictures, setProductPictures] = useState([]);
   
   const { productState, productDispatch } = useProducts();
-  const { categoryState, categoryDispatch } = useCategories();
+  const { categoryState } = useCategories();
   
-  console.log(productPictures)
-  
-  useEffect(() => {
-    getAllCategories(categoryDispatch);
-  }, []);
-
+  console.log('produtos', productState)
 
   const createProduct = (e) => {
 
@@ -76,6 +70,29 @@ export default function Products() {
     ]);
   }
 
+
+  useEffect(() => {
+
+    if(!isModalOpen){
+      setProductPictures([]);
+    }
+
+  }, [isModalOpen])
+
+
+  const renderProducts = (products) => {
+    return products.map((product, index) => (
+      <tr key={index}>
+        <td>{index}</td>
+        <td>{product.name}</td>
+        <td>{product.price}</td>
+        <td>{product.quantity}</td>
+        <td>{product.description}</td>
+        <td>{product.category}</td>
+      </tr>
+    ))
+  }
+
   return (
     <Layout sidebar={true}>
 
@@ -86,6 +103,26 @@ export default function Products() {
           <Button onClick={() => setIsModalOpen(true)}>
             Add
           </Button>
+        </div>
+
+        <div className='table-container'>
+
+          <table>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Descrição</th>
+                <th>Categoria</th>
+              </tr>
+            </thead>
+            <tbody>
+              {renderProducts(productState.products)}
+            </tbody>
+          </table>
+          
         </div>
 
       </div>
