@@ -1,5 +1,5 @@
 import * as categoriesTypes from "../context/categoriesContext/categoriesTypes";
-import { postRequest, getRequest, postFormDataRequest } from "./api";
+import { getRequest, postFormDataRequest } from "./api";
 
 
 export const getAllCategories = async (dispatch) => {
