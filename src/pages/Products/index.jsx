@@ -6,10 +6,12 @@ import { useProducts } from '../../context/productsContext/productsProvider';
 import { useCategories } from '../../context/categoriesContext/categoriesProvider';
 import { useEffect, useState } from 'react';
 import { createProducts } from '../../api/productsApi';
+import { generatePublicUrl } from '../../../urlConfig';
 
 export default function Products() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isProductDeailsModalOpen, setIsProductDeailsModalOpen] = useState(false);
   
   const [productName, setproductName] = useState('');
   const [productQuantity, setProductQuantity] = useState('');
@@ -17,6 +19,8 @@ export default function Products() {
   const [productDescription, setProductDescription] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [productPictures, setProductPictures] = useState([]);
+  
+  const [productDetails, setProductDetails] = useState(null);
   
   const { productState, productDispatch } = useProducts();
   const { categoryState } = useCategories();
@@ -79,15 +83,19 @@ export default function Products() {
 
   }, [isModalOpen])
 
+  
+  const setIsProductDeailsModal = (product) => {
+    setProductDetails(product);
+    setIsProductDeailsModalOpen(true);
+  }
 
   const renderProducts = (products) => {
     return products.map((product, index) => (
-      <tr key={index}>
+      <tr key={index} onClick={() => setIsProductDeailsModal(product)}>
         <td>{index}</td>
         <td>{product.name}</td>
         <td>{product.price}</td>
         <td>{product.quantity}</td>
-        <td>{product.description}</td>
         <td>{product.Category.name}</td>
       </tr>
     ))
@@ -95,9 +103,7 @@ export default function Products() {
 
   const renderAddProductModal = () => (
 
-    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-
-      <h2>Adicionar uma novo produto</h2>
+    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title='Adicionar um novo Produto'>
 
       <div className="input-container-product-add">
 
@@ -133,7 +139,53 @@ export default function Products() {
 
     </Modal>
 
-  )
+  );
+
+  const renderShowProductDetailsModal = () => {
+
+    if( !productDetails ) null;
+
+    return (
+
+      <Modal 
+        isOpen={isProductDeailsModalOpen} 
+        onClose={() => setIsProductDeailsModalOpen(false)} 
+        title={'Detalhes do produto'}
+      >
+
+        <div className='productDetailContainer'>
+          <div className='columnsDetailsProduct'>
+            <div>
+              <h3>Nome</h3>
+              <p>{productDetails.name}</p>
+              <h3>Quantidade</h3>
+              <p>{productDetails.quantity}</p>
+            </div>
+            <div>
+              <h3>Preço</h3>
+              <p>{productDetails.price}</p>
+              <h3>Categoria</h3>
+              <p>{productDetails.Category.name}</p>
+            </div>
+          </div>
+          <h3>Descrição</h3>
+          <p>{productDetails.description}</p>
+
+          <h3>Imagens do produto</h3>
+          <div className='pictureProductContainer'>
+            {productDetails.Pictures.map((picture, index) => (
+              <div className='pictureProductContent' key={index}>
+                <img src={generatePublicUrl(picture.img)} alt="" />
+              </div>
+            ))}
+          </div>
+
+        </div>
+
+      </Modal>
+    );
+  }
+
 
   return (
     <Layout sidebar={true}>
@@ -156,7 +208,6 @@ export default function Products() {
                 <th>Nome</th>
                 <th>Preço</th>
                 <th>Quantidade</th>
-                <th>Descrição</th>
                 <th>Categoria</th>
               </tr>
             </thead>
@@ -170,6 +221,7 @@ export default function Products() {
       </div>
 
       {renderAddProductModal()}
+      {productDetails && renderShowProductDetailsModal()}
 
     </Layout>
   )

@@ -78,9 +78,7 @@ export default function Categories() {
 
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-
-        <h2>Adicionar uma nova categoria</h2>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title='Adicionar uma nova categoria'>
                 
         <div className="input-container-category-add">
 
