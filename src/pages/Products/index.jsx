@@ -88,10 +88,52 @@ export default function Products() {
         <td>{product.price}</td>
         <td>{product.quantity}</td>
         <td>{product.description}</td>
-        <td>{product.category}</td>
+        <td>{product.Category.name}</td>
       </tr>
     ))
   }
+
+  const renderAddProductModal = () => (
+
+    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+
+      <h2>Adicionar uma novo produto</h2>
+
+      <div className="input-container-product-add">
+
+        <input onChange={e => setproductName(e.target.value)} type="text" className='input-product' placeholder='Nome do produto' />
+        <input onChange={e => setProductQuantity(e.target.value)} type="text" className='input-product' placeholder='Quantidade' />
+        <input onChange={e => setProductPrice(e.target.value)} type="text" className='input-product' placeholder='Preço' />
+        <input onChange={e => setProductDescription(e.target.value)} type="text" className='input-product' placeholder='Descrição' />
+
+        <select onChange={e => setCategoryId(e.target.value)}>
+          <option value="">Selecione a categoria</option>
+
+          {createCategoriesList(categoryState.categories).map(category => (
+            <option key={category.value} value={category.value}>{category.name}</option>
+          ))}
+
+        </select>
+
+          {productPictures.length > 0 && productPictures.map((picture, index) => (
+            <p key={index}>{picture.name}</p>
+          ))}
+
+        <input type="file" name="productPicture" onChange={handleProductPicture} />
+
+      </div>
+
+      <div className='btn-save-container-modal-product'>
+
+        <Button onClick={createProduct}>
+          Salvar
+        </Button>
+
+      </div>
+
+    </Modal>
+
+  )
 
   return (
     <Layout sidebar={true}>
@@ -127,44 +169,7 @@ export default function Products() {
 
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-
-        <h2>Adicionar uma novo produto</h2>
-
-        <div className="input-container-product-add">
-
-          <input onChange={e => setproductName(e.target.value)} type="text" className='input-product' placeholder='Nome do produto' />
-          <input onChange={e => setProductQuantity(e.target.value)} type="text" className='input-product' placeholder='Quantidade' />
-          <input onChange={e => setProductPrice(e.target.value)} type="text" className='input-product' placeholder='Preço' />
-          <input onChange={e => setProductDescription(e.target.value)} type="text" className='input-product' placeholder='Descrição' />
-
-          <select onChange={e => setCategoryId(e.target.value)}>
-            <option value="">Selecione a categoria</option>
-
-            {createCategoriesList(categoryState.categories).map(category => (
-              <option key={category.value} value={category.value}>{category.name}</option>
-            ))}
-
-          </select>
-
-            {productPictures.length > 0 && productPictures.map((picture, index) => (
-              <p key={index}>{picture.name}</p>
-            ))}
-
-          <input type="file" name="productPicture" onChange={handleProductPicture} />
-
-        </div>
-
-        <div className='btn-save-container-modal-product'>
-
-          <Button onClick={createProduct}>
-            Salvar
-          </Button>
-
-        </div>
-
-
-      </Modal>
+      {renderAddProductModal()}
 
     </Layout>
   )
