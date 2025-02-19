@@ -78,6 +78,11 @@ export default function Products() {
   useEffect(() => {
 
     if(!isModalOpen){
+      setproductName('');
+      setProductQuantity('');
+      setProductPrice('');
+      setProductDescription('');
+      setCategoryId('');
       setProductPictures([]);
     }
 

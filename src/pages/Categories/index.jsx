@@ -13,6 +13,8 @@ export default function Categories() {
   const [parentCategoryId, setParentCategoryId] = useState('');
   const [categoryImage, setCategoryImage] = useState('');
 
+  console.log(parentCategoryId)
+
   const { categoryState, categoryDispatch } = useCategories();
 
   const createCategory = (e) => {
@@ -27,7 +29,7 @@ export default function Categories() {
   
       createCategories(form, categoryDispatch);
 
-      setIsModalOpen(false);
+      handleCloseModal();
   }
 
   const renderCategories = (categories) => {
@@ -62,6 +64,13 @@ export default function Categories() {
     setCategoryImage(e.target.files[0]);
   }
 
+  const handleCloseModal = () => {
+    setParentCategoryId('');
+    setCategoryImage('');
+    setCategoryName('');
+    setIsModalOpen(false);
+  }
+
   return (
     <Layout sidebar={true}>
 
@@ -78,7 +87,7 @@ export default function Categories() {
 
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title='Adicionar uma nova categoria'>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} title='Adicionar uma nova categoria'>
                 
         <div className="input-container-category-add">
 
