@@ -26,6 +26,7 @@ export default function Products() {
   const { categoryState } = useCategories();
   
   console.log('produtos', productState)
+  console.log('produtos detalhes', productDetails)
 
   const createProduct = (e) => {
 
@@ -180,7 +181,7 @@ export default function Products() {
           <div className='pictureProductContainer'>
             {productDetails.Pictures.map((picture, index) => (
               <div className='pictureProductContent' key={index}>
-                <img src={generatePublicUrl(picture.img)} alt="" />
+                <img src={picture.img} alt="" />
               </div>
             ))}
           </div>
