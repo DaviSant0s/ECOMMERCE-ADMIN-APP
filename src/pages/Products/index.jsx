@@ -116,7 +116,7 @@ export default function Products() {
         <input onChange={e => setproductName(e.target.value)} type="text" className='input-product' placeholder='Nome do produto' />
         <input onChange={e => setProductQuantity(e.target.value)} type="text" className='input-product' placeholder='Quantidade' />
         <input onChange={e => setProductPrice(e.target.value)} type="text" className='input-product' placeholder='Preço' />
-        <input onChange={e => setProductDescription(e.target.value)} type="text" className='input-product' placeholder='Descrição' />
+        <textarea onChange={e => setProductDescription(e.target.value)} type="text" className='input-product' placeholder='Descrição' />
 
         <select onChange={e => setCategoryId(e.target.value)}>
           <option value="">Selecione a categoria</option>
