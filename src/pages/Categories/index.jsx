@@ -14,6 +14,10 @@ export default function Categories() {
   const [parentCategoryId, setParentCategoryId] = useState('');
   const [categoryImage, setCategoryImage] = useState('');
 
+  const [checkedArray, setCheckedArray] = useState([]);
+  const [expandedArray, setExpandedArray] = useState([]);
+  const [updateCategoryModal, setUpdateCategoryModal] = useState(false);
+
   console.log(parentCategoryId)
 
   const { categoryState, categoryDispatch } = useCategories();
@@ -62,6 +66,10 @@ export default function Categories() {
     setIsModalOpen(false);
   }
 
+  const updateCategory = () => {
+    setUpdateCategoryModal(true);
+  }
+
   return (
     <Layout sidebar={true}>
 
@@ -74,7 +82,7 @@ export default function Categories() {
           </Button>
         </div>
 
-        <CategoryHierarchy categories={categoryState.categories}/>
+        <CategoryHierarchy categories={categoryState.categories} handleClikEdit={updateCategory}/>
 
       </div>
 
@@ -104,6 +112,18 @@ export default function Categories() {
           </Button>
 
         </div>
+
+ 
+      </Modal>
+
+      {/** Edit category */}
+      <Modal 
+        title='Editar Categorias'
+        width='1500px'
+        isOpen={updateCategoryModal} 
+        onClose={() => setUpdateCategoryModal(false)}
+      >
+
 
 
       </Modal>

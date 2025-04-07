@@ -8,10 +8,10 @@ import { IoIosCheckbox,
          IoIosArrowDown } from "react-icons/io";
 
 
-export default function CategoryHierarchy({categories}) {
+export default function CategoryHierarchy({categories, handleClikEdit, handleClickDelete}) {
 
-  const [expanded, setExpanded] = useState([]);
   const [checked, setChecked] = useState([]);
+  const [expanded, setExpanded] = useState([]);
 
   const renderCategories = (categories) => {
 
@@ -28,20 +28,28 @@ export default function CategoryHierarchy({categories}) {
 
   return (
 
-    <CheckboxTree
-        nodes={renderCategories(categories)}
-        checked={checked}
-        expanded={expanded}
-        onCheck={checked => setChecked(checked)}
-        onExpand={expanded => setExpanded(expanded)}
-        icons={{
-            check: <IoIosCheckbox/>,
-            uncheck: <IoIosCheckboxOutline/>,
-            halfCheck: <IoIosCheckboxOutline/>,
-            expandClose: <IoIosArrowForward/>,
-            expandOpen: <IoIosArrowDown/>
-        }}
-    />
+    <div className='categoryHierarchy-container'>
+      <CheckboxTree
+          nodes={renderCategories(categories)}
+          checked={checked}
+          expanded={expanded}
+          onCheck={checked => setChecked(checked)}
+          onExpand={expanded => setExpanded(expanded)}
+          icons={{
+              check: <IoIosCheckbox/>,
+              uncheck: <IoIosCheckboxOutline/>,
+              halfCheck: <IoIosCheckboxOutline/>,
+              expandClose: <IoIosArrowForward/>,
+              expandOpen: <IoIosArrowDown/>
+          }}
+      />
+      <div className='buttons-category-container'>
+        <button onClick={handleClikEdit}>Editar</button>
+        <button onClick={handleClickDelete}>Excluir</button>
+      </div>
+
+    </div>
+
   )
 
 }
