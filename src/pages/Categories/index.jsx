@@ -5,9 +5,7 @@ import { createCategories } from '../../api/categoriesApi';
 import { useCategories } from '../../context/categoriesContext/categoriesProvider';
 import Modal from '../../components/UI/Modal';
 import Button from '../../components/UI/Button';
-import CheckboxTree from 'react-checkbox-tree';
-import 'react-checkbox-tree/lib/react-checkbox-tree.css';
-import { IoIosCheckbox, IoIosCheckboxOutline, IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
+import CategoryHierarchy from './components/CategoryHierarchy';
 
 export default function Categories() {
 
@@ -15,8 +13,6 @@ export default function Categories() {
   const [categoryName, setCategoryName] = useState('');
   const [parentCategoryId, setParentCategoryId] = useState('');
   const [categoryImage, setCategoryImage] = useState('');
-  const [expanded, setExpanded] = useState([]);
-  const [checked, setChecked] = useState([]);
 
   console.log(parentCategoryId)
 
@@ -36,19 +32,6 @@ export default function Categories() {
       createCategories(form, categoryDispatch);
 
       handleCloseModal();
-  }
-
-  const renderCategories = (categories) => {
-
-    return categories.map(category => (
-      {
-        label: category.name,
-        value: category.id,
-        children: category.children.length > 0 && renderCategories(category.children)
-      }
-        
-    ));
-
   }
 
   const createCategoriesList = (categories, options = []) => {
@@ -91,20 +74,7 @@ export default function Categories() {
           </Button>
         </div>
 
-        <CheckboxTree
-            nodes={renderCategories(categoryState.categories)}
-            checked={checked}
-            expanded={expanded}
-            onCheck={checked => setChecked(checked)}
-            onExpand={expanded => setExpanded(expanded)}
-            icons={{
-              check: <IoIosCheckbox/>,
-              uncheck: <IoIosCheckboxOutline/>,
-              halfCheck: <IoIosCheckboxOutline/>,
-              expandClose: <IoIosArrowForward/>,
-              expandOpen: <IoIosArrowDown/>
-            }}
-        />
+        <CategoryHierarchy categories={categoryState.categories}/>
 
       </div>
 
