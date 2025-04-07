@@ -5,6 +5,9 @@ import { createCategories } from '../../api/categoriesApi';
 import { useCategories } from '../../context/categoriesContext/categoriesProvider';
 import Modal from '../../components/UI/Modal';
 import Button from '../../components/UI/Button';
+import CheckboxTree from 'react-checkbox-tree';
+import 'react-checkbox-tree/lib/react-checkbox-tree.css';
+import { IoIosCheckbox, IoIosCheckboxOutline, IoIosArrowForward, IoIosArrowDown } from "react-icons/io";
 
 export default function Categories() {
 
@@ -12,10 +15,13 @@ export default function Categories() {
   const [categoryName, setCategoryName] = useState('');
   const [parentCategoryId, setParentCategoryId] = useState('');
   const [categoryImage, setCategoryImage] = useState('');
+  const [expanded, setExpanded] = useState([]);
+  const [checked, setChecked] = useState([]);
 
   console.log(parentCategoryId)
 
   const { categoryState, categoryDispatch } = useCategories();
+  
 
   const createCategory = (e) => {
     
@@ -35,10 +41,12 @@ export default function Categories() {
   const renderCategories = (categories) => {
 
     return categories.map(category => (
-      <li key={category.name}>
-        {category.name}
-        {category.children.length > 0 && <ul>{renderCategories(category.children)}</ul>}
-      </li>
+      {
+        label: category.name,
+        value: category.id,
+        children: category.children.length > 0 && renderCategories(category.children)
+      }
+        
     ));
 
   }
@@ -83,7 +91,20 @@ export default function Categories() {
           </Button>
         </div>
 
-        <ul>{renderCategories(categoryState.categories)}</ul>
+        <CheckboxTree
+            nodes={renderCategories(categoryState.categories)}
+            checked={checked}
+            expanded={expanded}
+            onCheck={checked => setChecked(checked)}
+            onExpand={expanded => setExpanded(expanded)}
+            icons={{
+              check: <IoIosCheckbox/>,
+              uncheck: <IoIosCheckboxOutline/>,
+              halfCheck: <IoIosCheckboxOutline/>,
+              expandClose: <IoIosArrowForward/>,
+              expandOpen: <IoIosArrowDown/>
+            }}
+        />
 
       </div>
 
