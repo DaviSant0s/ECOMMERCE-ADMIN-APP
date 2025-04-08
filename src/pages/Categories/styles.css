@@ -42,6 +42,8 @@
     justify-content: end;
 }
 
-.line-modal {
-    color: rgb(233, 233, 233);
+.expanded-categories-modal {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
 }

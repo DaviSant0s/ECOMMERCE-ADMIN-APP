@@ -6,6 +6,8 @@ import { useCategories } from '../../context/categoriesContext/categoriesProvide
 import Modal from '../../components/UI/Modal';
 import Button from '../../components/UI/Button';
 import CategoryHierarchy from './components/CategoryHierarchy';
+import Input from '../../components/UI/Input';
+import Select from '../../components/UI/Select';
 
 export default function Categories() {
 
@@ -18,9 +20,9 @@ export default function Categories() {
   const [expandedArray, setExpandedArray] = useState([]);
   const [updateCategoryModal, setUpdateCategoryModal] = useState(false);
 
-  console.log(parentCategoryId)
-
+  
   const { categoryState, categoryDispatch } = useCategories();
+  console.log(categoryState)
   
 
   const createCategory = (e) => {
@@ -119,11 +121,15 @@ export default function Categories() {
       {/** Edit category */}
       <Modal 
         title='Editar Categorias'
-        width='1500px'
+        width='1000px'
         isOpen={updateCategoryModal} 
         onClose={() => setUpdateCategoryModal(false)}
       >
 
+        <div className='expanded-categories-modal'>
+          <Input placeholder='Nome da categoria' type='select'/>
+          <Select placeholder='Selecionar categoria' options={createCategoriesList(categoryState.categories)}/>
+        </div>
 
 
       </Modal>
