@@ -8,10 +8,7 @@ import { IoIosCheckbox,
          IoIosArrowDown } from "react-icons/io";
 
 
-export default function CategoryHierarchy({categories, handleClikEdit, handleClickDelete}) {
-
-  const [checked, setChecked] = useState([]);
-  const [expanded, setExpanded] = useState([]);
+export default function CategoryHierarchy({categories, handleClikEdit, handleClickDelete, checked, setChecked, expanded, setExpanded}) {
 
   const renderCategories = (categories) => {
 

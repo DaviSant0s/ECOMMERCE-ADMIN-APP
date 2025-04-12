@@ -16,6 +16,9 @@ export default function Categories() {
   const [parentCategoryId, setParentCategoryId] = useState('');
   const [categoryImage, setCategoryImage] = useState('');
 
+  const [checked, setChecked] = useState([]);
+  const [expanded, setExpanded] = useState([]);
+
   const [checkedArray, setCheckedArray] = useState([]);
   const [expandedArray, setExpandedArray] = useState([]);
   const [updateCategoryModal, setUpdateCategoryModal] = useState(false);
@@ -45,7 +48,7 @@ export default function Categories() {
     categories.map(category => {
 
         options.push(
-          {name: category.name, value: category.id}
+          {name: category.name, value: category.id, parentId: category.parentId}
         );
 
         if (category.children.length > 0){
@@ -70,6 +73,30 @@ export default function Categories() {
 
   const updateCategory = () => {
     setUpdateCategoryModal(true);
+    const categories = createCategoriesList(categoryState.categories);
+    
+    const checkedArray = [];
+    const expandedArray = [];
+
+    checked.length > 0 && checked.forEach(categoryId => {
+      const category = categories.find(category => categoryId == category.value);
+      category && checkedArray.push(category);
+    });
+    
+    expanded.length > 0 && expanded.forEach(categoryId => {
+      const category = categories.find(category => categoryId == category.value);
+      category && expandedArray.push(category);
+    });
+    
+    setCheckedArray(checkedArray)
+    setExpandedArray(expandedArray)
+
+    console.log('checked', checked)
+    console.log('expanded', expanded)
+    console.log('categories', categories)
+    console.log('checkedArray', checkedArray)
+    console.log('expandedArray', expandedArray)
+
   }
 
   return (
@@ -84,7 +111,14 @@ export default function Categories() {
           </Button>
         </div>
 
-        <CategoryHierarchy categories={categoryState.categories} handleClikEdit={updateCategory}/>
+        <CategoryHierarchy 
+          categories={categoryState.categories} 
+          handleClikEdit={updateCategory}
+          checked={checked}
+          setChecked={setChecked}
+          expanded={expanded}
+          setExpanded={setExpanded}
+        />
 
       </div>
 
@@ -126,11 +160,59 @@ export default function Categories() {
         onClose={() => setUpdateCategoryModal(false)}
       >
 
-        <div className='expanded-categories-modal'>
-          <Input placeholder='Nome da categoria' type='select'/>
-          <Select placeholder='Selecionar categoria' options={createCategoriesList(categoryState.categories)}/>
+        <div className='inputs-categories-modal'>
+          
+          <span>Expandidas</span>
+
+          {expandedArray.length > 0 && expandedArray.map((category, index) => (
+            <div key={index} className='rows-categories-modal'>
+
+              <Input 
+                placeholder='Nome da categoria' 
+                type='text' 
+                value={category.name} 
+                onChange={e => setCategoryName(e.target.value)}
+              />
+
+              <Select 
+                placeholder='Selecionar categoria' 
+                options={createCategoriesList(categoryState.categories)}
+                onChange={e => setParentCategoryId(e.value)}
+              />
+
+            </div>
+          ))}
+          
+          <span>Categorias selecionadas</span>
+
+          {checkedArray.length > 0 && checkedArray.map((category, index) => (
+            <div key={index} className='rows-categories-modal'>
+
+              <Input 
+                placeholder='Nome da categoria' 
+                type='text' 
+                value={category.name} 
+                onChange={e => setCategoryName(e.target.value)}
+              />
+
+              <Select 
+                placeholder='Selecionar categoria' 
+                options={createCategoriesList(categoryState.categories)}
+                onChange={e => setParentCategoryId(e.value)}
+              />
+
+            </div>
+          ))}
+
         </div>
 
+        <div className='btn-save-container-modal-category'>
+
+          <Button>
+              Salvar
+          </Button>
+
+        </div>
 
       </Modal>
 
