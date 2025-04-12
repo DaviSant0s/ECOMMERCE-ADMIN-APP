@@ -99,6 +99,27 @@ export default function Categories() {
 
   }
 
+  const handleCategoryInput = (key, value, index, type) => {
+    if(type == 'checked') {
+
+      const updatedCheckedArray = checkedArray.map((item, _index) => {
+        return index == _index ? {...item, [key]: value} : item
+      });
+
+      setCheckedArray(updatedCheckedArray);
+
+    } else if(type == 'expanded') {
+
+      const updatedExpandedArray = expandedArray.map((item, _index) => {
+        return index == _index ? {...item, [key]: value} : item
+      });
+
+      setExpandedArray(updatedExpandedArray);
+
+    }
+
+  }
+
   return (
     <Layout sidebar={true}>
 
@@ -171,13 +192,13 @@ export default function Categories() {
                 placeholder='Nome da categoria' 
                 type='text' 
                 value={category.name} 
-                onChange={e => setCategoryName(e.target.value)}
+                onChange={e => handleCategoryInput('name', e.target.value, index, 'expanded')}
               />
 
               <Select 
                 placeholder='Selecionar categoria' 
                 options={createCategoriesList(categoryState.categories)}
-                onChange={e => setParentCategoryId(e.value)}
+                onChange={e => handleCategoryInput('parentId', e.value, index, 'expanded')}
               />
 
             </div>
@@ -192,13 +213,13 @@ export default function Categories() {
                 placeholder='Nome da categoria' 
                 type='text' 
                 value={category.name} 
-                onChange={e => setCategoryName(e.target.value)}
+                onChange={e => handleCategoryInput('name', e.target.value, index, 'checked')}
               />
 
               <Select 
                 placeholder='Selecionar categoria' 
                 options={createCategoriesList(categoryState.categories)}
-                onChange={e => setParentCategoryId(e.value)}
+                onChange={e => handleCategoryInput('parentId', e.value, index, 'checked')}
               />
 
             </div>
