@@ -52,3 +52,19 @@ export const createCategories = async (categoryData, dispatch) => {
 
 }
 
+export const updateCategories = async (categoryData) => {
+
+    try {
+
+        const data = await postFormDataRequest('http://localhost:3000/api/category/updateCategories', categoryData);
+
+        console.log(data);
+        
+    } catch (error) {
+
+        console.log(error.message);
+        
+    }
+
+}
+

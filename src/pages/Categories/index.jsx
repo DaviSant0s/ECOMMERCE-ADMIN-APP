@@ -120,6 +120,103 @@ export default function Categories() {
 
   }
 
+  const renderUpdateCategoriesModal = () => (
+    <Modal 
+      title='Editar Categorias'
+      width='1000px'
+      isOpen={updateCategoryModal} 
+      onClose={() => setUpdateCategoryModal(false)}
+    >
+
+      <div className='inputs-categories-modal'>
+        
+        <span>Expandidas</span>
+
+        {expandedArray.length > 0 && expandedArray.map((category, index) => (
+          <div key={index} className='rows-categories-modal'>
+
+            <Input 
+              placeholder='Nome da categoria' 
+              type='text' 
+              value={category.name} 
+              onChange={e => handleCategoryInput('name', e.target.value, index, 'expanded')}
+            />
+
+            <Select 
+              placeholder='Selecionar categoria' 
+              options={createCategoriesList(categoryState.categories)}
+              onChange={e => handleCategoryInput('parentId', e.value, index, 'expanded')}
+            />
+
+          </div>
+        ))}
+        
+        <span>Categorias selecionadas</span>
+
+        {checkedArray.length > 0 && checkedArray.map((category, index) => (
+          <div key={index} className='rows-categories-modal'>
+
+            <Input 
+              placeholder='Nome da categoria' 
+              type='text' 
+              value={category.name} 
+              onChange={e => handleCategoryInput('name', e.target.value, index, 'checked')}
+            />
+
+            <Select 
+              placeholder='Selecionar categoria' 
+              options={createCategoriesList(categoryState.categories)}
+              onChange={e => handleCategoryInput('parentId', e.value, index, 'checked')}
+            />
+
+          </div>
+        ))}
+
+      </div>
+
+      <div className='btn-save-container-modal-category'>
+
+        <Button>
+            Salvar
+        </Button>
+
+      </div>
+
+    </Modal>
+  );
+
+  const renderCreateCategoriesModal = () => (
+    <Modal isOpen={isModalOpen} onClose={handleCloseModal} title='Adicionar uma nova categoria'>
+                
+      <div className="input-container-category-add">
+
+        <input onChange={e => setCategoryName(e.target.value)} type="text" className='input-category' placeholder='Nome da categoria'/>
+
+        <select onChange={e => setParentCategoryId(e.target.value)}>
+          <option value="">Selecione uma categoria</option>
+
+          {createCategoriesList(categoryState.categories).map(category => (
+              <option key={category.value} value={category.value}>{category.name}</option>
+          ))}
+
+        </select>
+
+        <input type="file" name="categoryImage" onChange={handleCategoryImage} />
+
+      </div>
+
+      <div className='btn-save-container-modal-category'>
+
+        <Button onClick={createCategory}>
+            Salvar
+        </Button>
+
+      </div>
+
+ 
+    </Modal>
+  )
+
   return (
     <Layout sidebar={true}>
 
@@ -143,99 +240,8 @@ export default function Categories() {
 
       </div>
 
-      <Modal isOpen={isModalOpen} onClose={handleCloseModal} title='Adicionar uma nova categoria'>
-                
-        <div className="input-container-category-add">
-
-            <input onChange={e => setCategoryName(e.target.value)} type="text" className='input-category' placeholder='Nome da categoria'/>
-
-            <select onChange={e => setParentCategoryId(e.target.value)}>
-              <option value="">Selecione uma categoria</option>
-
-              {createCategoriesList(categoryState.categories).map(category => (
-                  <option key={category.value} value={category.value}>{category.name}</option>
-              ))}
- 
-            </select>
-
-            <input type="file" name="categoryImage" onChange={handleCategoryImage} />
-
-        </div>
-
-        <div className='btn-save-container-modal-category'>
-
-          <Button onClick={createCategory}>
-              Salvar
-          </Button>
-
-        </div>
-
- 
-      </Modal>
-
-      {/** Edit category */}
-      <Modal 
-        title='Editar Categorias'
-        width='1000px'
-        isOpen={updateCategoryModal} 
-        onClose={() => setUpdateCategoryModal(false)}
-      >
-
-        <div className='inputs-categories-modal'>
-          
-          <span>Expandidas</span>
-
-          {expandedArray.length > 0 && expandedArray.map((category, index) => (
-            <div key={index} className='rows-categories-modal'>
-
-              <Input 
-                placeholder='Nome da categoria' 
-                type='text' 
-                value={category.name} 
-                onChange={e => handleCategoryInput('name', e.target.value, index, 'expanded')}
-              />
-
-              <Select 
-                placeholder='Selecionar categoria' 
-                options={createCategoriesList(categoryState.categories)}
-                onChange={e => handleCategoryInput('parentId', e.value, index, 'expanded')}
-              />
-
-            </div>
-          ))}
-          
-          <span>Categorias selecionadas</span>
-
-          {checkedArray.length > 0 && checkedArray.map((category, index) => (
-            <div key={index} className='rows-categories-modal'>
-
-              <Input 
-                placeholder='Nome da categoria' 
-                type='text' 
-                value={category.name} 
-                onChange={e => handleCategoryInput('name', e.target.value, index, 'checked')}
-              />
-
-              <Select 
-                placeholder='Selecionar categoria' 
-                options={createCategoriesList(categoryState.categories)}
-                onChange={e => handleCategoryInput('parentId', e.value, index, 'checked')}
-              />
-
-            </div>
-          ))}
-
-        </div>
-
-        <div className='btn-save-container-modal-category'>
-
-          <Button>
-              Salvar
-          </Button>
-
-        </div>
-
-      </Modal>
+      {renderCreateCategoriesModal()}
+      {renderUpdateCategoriesModal()}
 
     </Layout>
   )
