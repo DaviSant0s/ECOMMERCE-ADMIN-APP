@@ -58,7 +58,7 @@ export const updateCategories = async (categoryData) => {
 
         const data = await postFormDataRequest('http://localhost:3000/api/category/updateCategories', categoryData);
 
-        console.log(data);
+        console.log('categorias atualizadas', data.updatedCategories);
         
     } catch (error) {
 

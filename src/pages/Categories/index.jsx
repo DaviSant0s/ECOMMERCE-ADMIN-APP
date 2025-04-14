@@ -1,7 +1,7 @@
 import './styles.css';
 import Layout from '../../components/Layout'
 import { useState } from 'react';
-import { createCategories } from '../../api/categoriesApi';
+import { createCategories, updateCategories } from '../../api/categoriesApi';
 import { useCategories } from '../../context/categoriesContext/categoriesProvider';
 import Modal from '../../components/UI/Modal';
 import Button from '../../components/UI/Button';
@@ -120,6 +120,63 @@ export default function Categories() {
 
   }
 
+  const renderCreateCategoriesModal = () => (
+    <Modal isOpen={isModalOpen} onClose={handleCloseModal} title='Adicionar uma nova categoria'>
+                
+      <div className="input-container-category-add">
+
+        <input onChange={e => setCategoryName(e.target.value)} type="text" className='input-category' placeholder='Nome da categoria'/>
+
+        <select onChange={e => setParentCategoryId(e.target.value)}>
+          <option value="">Selecione uma categoria</option>
+
+          {createCategoriesList(categoryState.categories).map(category => (
+              <option key={category.value} value={category.value}>{category.name}</option>
+            ))}
+
+        </select>
+
+        <input type="file" name="categoryImage" onChange={handleCategoryImage} />
+
+      </div>
+
+      <div className='btn-save-container-modal-category'>
+
+        <Button onClick={createCategory}>
+            Salvar
+        </Button>
+
+      </div>
+
+ 
+    </Modal>
+  );
+
+  const updateCategoriesForm = (e) => {
+
+    e.preventDefault();
+
+    const form = new FormData();
+    /*
+      expandedArray.forEach((item, index) => {
+        form.append('id', item.value);
+        form.append('name', item.name);
+        form.append("parentId", item.parentId ? item.parentId : "");
+      });
+    */
+
+    checkedArray.forEach((item, index) => {
+      form.append('id', item.value);
+      form.append('name', item.name);
+      form.append("parentId", item.parentId ? item.parentId : "");
+    });
+
+    updateCategories(form, categoryDispatch);
+
+    setUpdateCategoryModal(false)
+    
+  }
+  
   const renderUpdateCategoriesModal = () => (
     <Modal 
       title='Editar Categorias'
@@ -176,7 +233,7 @@ export default function Categories() {
 
       <div className='btn-save-container-modal-category'>
 
-        <Button>
+        <Button onClick={updateCategoriesForm}>
             Salvar
         </Button>
 
@@ -184,39 +241,7 @@ export default function Categories() {
 
     </Modal>
   );
-
-  const renderCreateCategoriesModal = () => (
-    <Modal isOpen={isModalOpen} onClose={handleCloseModal} title='Adicionar uma nova categoria'>
-                
-      <div className="input-container-category-add">
-
-        <input onChange={e => setCategoryName(e.target.value)} type="text" className='input-category' placeholder='Nome da categoria'/>
-
-        <select onChange={e => setParentCategoryId(e.target.value)}>
-          <option value="">Selecione uma categoria</option>
-
-          {createCategoriesList(categoryState.categories).map(category => (
-              <option key={category.value} value={category.value}>{category.name}</option>
-          ))}
-
-        </select>
-
-        <input type="file" name="categoryImage" onChange={handleCategoryImage} />
-
-      </div>
-
-      <div className='btn-save-container-modal-category'>
-
-        <Button onClick={createCategory}>
-            Salvar
-        </Button>
-
-      </div>
-
- 
-    </Modal>
-  )
-
+  
   return (
     <Layout sidebar={true}>
 
