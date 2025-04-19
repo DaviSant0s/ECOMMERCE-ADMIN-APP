@@ -157,13 +157,13 @@ export default function Categories() {
     e.preventDefault();
 
     const form = new FormData();
-    /*
-      expandedArray.forEach((item, index) => {
-        form.append('id', item.value);
-        form.append('name', item.name);
-        form.append("parentId", item.parentId ? item.parentId : "");
-      });
-    */
+    
+    expandedArray.forEach((item, index) => {
+      form.append('id', item.value);
+      form.append('name', item.name);
+      form.append("parentId", item.parentId ? item.parentId : "");
+    });
+    
 
     checkedArray.forEach((item, index) => {
       form.append('id', item.value);

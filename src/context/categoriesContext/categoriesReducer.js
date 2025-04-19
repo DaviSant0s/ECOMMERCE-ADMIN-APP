@@ -5,7 +5,7 @@ import * as categoriesTypes from './categoriesTypes';
 const buildNewCategories = (parentId, categories, category) => {
     let myCategories = [];
 
-    if(parentId == undefined){
+    if(parentId == ""){
         return [
             ...categories,
             {

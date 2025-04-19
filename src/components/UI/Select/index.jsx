@@ -7,9 +7,10 @@ export default function Select({onChange, placeholder, options=[]}) {
     <div className='selectContainer'>
       <ReactSelect 
 
-        options={options.map(option => {
-          return {value: option.value, label: option.name}
-        })}
+        options={[
+          {value:"", label: "Nenhum valor"},
+          ...options.map(option => ({value: option.value, label: option.name}))
+        ]}
 
         onChange={onChange}
 

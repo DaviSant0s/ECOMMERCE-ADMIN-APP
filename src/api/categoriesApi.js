@@ -52,13 +52,15 @@ export const createCategories = async (categoryData, dispatch) => {
 
 }
 
-export const updateCategories = async (categoryData) => {
+export const updateCategories = async (categoryData, dispatch) => {
 
     try {
 
         const data = await postFormDataRequest('http://localhost:3000/api/category/updateCategories', categoryData);
 
         console.log('categorias atualizadas', data.updatedCategories);
+
+        getAllCategories(dispatch);
         
     } catch (error) {
 
