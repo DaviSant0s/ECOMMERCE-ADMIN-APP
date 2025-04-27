@@ -14,8 +14,6 @@ export const getAllCategories = async (dispatch) => {
             type: categoriesTypes.GET_ALL_CATEGORIES_SUCCESS, 
             payload: { categories: data.categoryList}
         });
-
-        console.log(data.categoryList)
         
     } catch (error) {
 
@@ -54,17 +52,22 @@ export const createCategories = async (categoryData, dispatch) => {
 
 export const updateCategories = async (categoryData, dispatch) => {
 
+    dispatch({ type: categoriesTypes.UPDATE_CATEGORIES_REQUEST });
+
     try {
 
         const data = await postFormDataRequest('http://localhost:3000/api/category/updateCategories', categoryData);
 
-        console.log('categorias atualizadas', data.updatedCategories);
+        dispatch({ type: categoriesTypes.UPDATE_CATEGORIES_SUCCESS });
 
         getAllCategories(dispatch);
         
     } catch (error) {
 
-        console.log(error.message);
+        dispatch({ 
+            type: categoriesTypes.UPDATE_CATEGORIES_FAILURE, 
+            payload: { error: error.message }
+        });
         
     }
 
