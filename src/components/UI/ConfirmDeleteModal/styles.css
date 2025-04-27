@@ -1,0 +1,66 @@
+/*modal conform delete*/
+
+.delete-confirm-container-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+    padding-left: 30px;
+    padding-right: 30px;
+    min-width: 350px;
+}
+
+.delete-confirm-container-modal > span {
+    font-weight: 600;
+    font-size: 1.3em;
+    color: rgb(41, 41, 41);
+}
+
+.btn-confirm-delete-modal {
+    display: flex;
+    width: 100%;
+}
+
+.btn-cancel-delete-container, .btn-confirm-delete-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80px;
+    border-top: 1px solid rgb(213, 213, 213);
+}
+
+.btn-cancel-delete-container {
+    border-right: 1px solid rgb(213, 213, 213);
+}
+
+.btn-cancel-delete, .btn-confirm-delete {
+    appearance: none;
+    border: none;
+    width: 100px;
+    cursor: pointer;
+
+    width: 80%;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+.btn-cancel-delete{
+
+    background-color: white;
+    color: rgb(101, 101, 101);
+    font-size: 1.5em;
+    font-weight: 600;
+
+}
+
+.btn-confirm-delete {
+
+    background-color: #d3695c;
+    color: white;
+    
+
+}

@@ -8,6 +8,7 @@ import Button from '../../components/UI/Button';
 import CategoryHierarchy from './components/CategoryHierarchy';
 import Input from '../../components/UI/Input';
 import Select from '../../components/UI/Select';
+import ConfirmDeleteModal from '../../components/UI/ConfirmDeleteModal';
 
 export default function Categories() {
 
@@ -23,6 +24,7 @@ export default function Categories() {
   const [expandedArray, setExpandedArray] = useState([]);
   const [updateCategoryModal, setUpdateCategoryModal] = useState(false);
 
+  const [deleteCategoryModal, setDeleteCategoryModal] = useState(false);
   
   const { categoryState, categoryDispatch } = useCategories();
   console.log(categoryState)
@@ -90,12 +92,6 @@ export default function Categories() {
     
     setCheckedArray(checkedArray)
     setExpandedArray(expandedArray)
-
-    console.log('checked', checked)
-    console.log('expanded', expanded)
-    console.log('categories', categories)
-    console.log('checkedArray', checkedArray)
-    console.log('expandedArray', expandedArray)
 
   }
 
@@ -241,6 +237,10 @@ export default function Categories() {
 
     </Modal>
   );
+
+  const deleteCategory = () => {
+    setDeleteCategoryModal(false)
+  }
   
   return (
     <Layout sidebar={true}>
@@ -257,6 +257,7 @@ export default function Categories() {
         <CategoryHierarchy 
           categories={categoryState.categories} 
           handleClikEdit={updateCategory}
+          handleClickDelete={() => setDeleteCategoryModal(true)}
           checked={checked}
           setChecked={setChecked}
           expanded={expanded}
@@ -267,6 +268,12 @@ export default function Categories() {
 
       {renderCreateCategoriesModal()}
       {renderUpdateCategoriesModal()}
+
+      <ConfirmDeleteModal
+        isOpen={deleteCategoryModal}
+        handleConfirm={deleteCategory}
+        handleCancel={() => setDeleteCategoryModal(false)}
+      />
 
     </Layout>
   )
