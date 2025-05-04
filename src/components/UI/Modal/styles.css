@@ -7,7 +7,6 @@
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
-
 }
   
 .modal {
@@ -18,7 +17,6 @@
   width: 800px;
   padding: 20px;
   border-radius: 4px;
-  overflow: hidden;
 }
 
 .close-icon-modal {

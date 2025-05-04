@@ -1,7 +1,7 @@
 import './styles.css';
 import Modal from '../Modal'
 
-export default function ConfirmDeleteModal({ children='Tem certeza que deseja excluir?', isOpen,  handleConfirm, handleCancel}) {
+export default function ConfirmDeleteModal({ children='Tem certeza que deseja excluir?', isOpen,  handleConfirm, handleCancel, style={}}) {
 
   return (
     <Modal
@@ -13,9 +13,9 @@ export default function ConfirmDeleteModal({ children='Tem certeza que deseja ex
       padding='0px'
     >
 
-      <div className='delete-confirm-container-modal'>
+      <div style={style} className='delete-confirm-container-modal'>
         
-        <span>{children}</span>
+        {children}
 
       </div>
 

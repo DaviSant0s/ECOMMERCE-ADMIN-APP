@@ -27,7 +27,6 @@ export default function Categories() {
   const [deleteCategoryModal, setDeleteCategoryModal] = useState(false);
   
   const { categoryState, categoryDispatch } = useCategories();
-  console.log(categoryState)
   
 
   const createCategory = (e) => {
@@ -73,8 +72,7 @@ export default function Categories() {
     setIsModalOpen(false);
   }
 
-  const updateCategory = () => {
-    setUpdateCategoryModal(true);
+  const updateCheckedAndExpandedCategories = () => {
     const categories = createCategoriesList(categoryState.categories);
     
     const checkedArray = [];
@@ -92,7 +90,11 @@ export default function Categories() {
     
     setCheckedArray(checkedArray)
     setExpandedArray(expandedArray)
+  }
 
+  const updateCategory = () => {
+    setUpdateCategoryModal(true);
+    updateCheckedAndExpandedCategories();
   }
 
   const handleCategoryInput = (key, value, index, type) => {
@@ -239,8 +241,25 @@ export default function Categories() {
   );
 
   const deleteCategory = () => {
-    setDeleteCategoryModal(false)
+    setDeleteCategoryModal(true)
+    updateCheckedAndExpandedCategories();
   }
+  
+  const confirmDeleteCategory = () => {
+
+    const checkedIdsArray = checkedArray.map(item => ({id: item.value}));
+    const expandedIdsArray = expandedArray.map(item => ({id: item.value}));
+    const idsArray = expandedIdsArray.concat(checkedIdsArray);
+
+    console.log(checkedIdsArray)
+    console.log(expandedIdsArray)
+    console.log(idsArray)
+
+    setDeleteCategoryModal(false) 
+
+  }
+
+
   
   return (
     <Layout sidebar={true}>
@@ -257,7 +276,7 @@ export default function Categories() {
         <CategoryHierarchy 
           categories={categoryState.categories} 
           handleClikEdit={updateCategory}
-          handleClickDelete={() => setDeleteCategoryModal(true)}
+          handleClickDelete={deleteCategory}
           checked={checked}
           setChecked={setChecked}
           expanded={expanded}
@@ -271,9 +290,32 @@ export default function Categories() {
 
       <ConfirmDeleteModal
         isOpen={deleteCategoryModal}
-        handleConfirm={deleteCategory}
+        handleConfirm={confirmDeleteCategory}
         handleCancel={() => setDeleteCategoryModal(false)}
-      />
+        style={{alignItems: 'start'}}
+      >
+        <h3 className='confirm-cancel-delete-title-list'>Expandidas:</h3>
+
+        {
+        
+          expandedArray.map((item, index) => (
+            <p key={index}>{item.name}</p>
+          ))
+      
+        }
+
+
+        <h3 className='confirm-cancel-delete-title-list'>Selecionadas:</h3>
+
+        {
+        
+          checkedArray.map((item, index) => (
+            <p key={index}>{item.name}</p>
+          ))
+        
+        }
+
+      </ConfirmDeleteModal>
 
     </Layout>
   )
