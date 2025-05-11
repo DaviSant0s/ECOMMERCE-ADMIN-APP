@@ -1,19 +1,15 @@
-import { useEffect } from "react";
-import { useNavigate,  } from "react-router-dom";
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export default function PrivateRoute({element: Component}) {
-  
-    const navigate = useNavigate();
-    const token = window.localStorage.getItem('token');
+export default function PrivateRoute({ element: Component }) {
+  const navigate = useNavigate();
+  const token = window.localStorage.getItem('token');
 
-    useEffect(() => {
+  useEffect(() => {
+    if (!token) navigate('/signin');
+  }, [token, navigate]);
 
-      if(!token) navigate('/signin');
+  if (!token) return null;
 
-    }, [token, navigate]);
-
-    if(!token) return null;
-
-  return <Component/>;
-
+  return <Component />;
 }

@@ -1,8 +1,8 @@
 .selectContainer {
-    width: 100%;
-    cursor: pointer;
+  width: 100%;
+  cursor: pointer;
 }
 
 .reactSelect * {
-    cursor: pointer;
+  cursor: pointer;
 }

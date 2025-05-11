@@ -1,114 +1,115 @@
 .product-container {
-    width: fit-content;
-    height: 100%;
-    padding-left: 2em;
-    padding-right: 2em;
+  width: fit-content;
+  height: 100%;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 .title-product-and-add-button {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .title-product-and-add-button > h1 {
-    font-weight: 600;
-    font-size: 2em
+  font-weight: 600;
+  font-size: 2em;
 }
 
 .add-product-btn {
-    width: 100px;
-    cursor: pointer;
+  width: 100px;
+  cursor: pointer;
 }
 
 .product-container ul {
-    padding-left: 1.5em;
-    font-size: 20px;
+  padding-left: 1.5em;
+  font-size: 20px;
 }
 
 .input-container-product-add {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 30px;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+  margin-top: 20px;
 }
 
 .btn-save-container-modal-product {
-    display: flex;
-    justify-content: end;
+  display: flex;
+  justify-content: end;
 }
 
 .line-modal {
-    color: rgb(233, 233, 233);
+  color: rgb(233, 233, 233);
 }
 
-.table-container{
-    margin-top: 30px;
+.table-container {
+  margin-top: 30px;
 }
 
 table {
-    border-collapse: collapse;
-    width: 1000px;
+  border-collapse: collapse;
+  width: 1000px;
 }
 
 table tr {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.196);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.196);
 }
 
 table > tbody > tr {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 table > tbody > tr:hover {
-    background-color: rgb(252, 250, 250);
+  background-color: rgb(252, 250, 250);
 }
 
-table th, td {
-    padding: 8px;
-    text-align: left;
+table th,
+td {
+  padding: 8px;
+  text-align: left;
 }
 
 table > thead > tr {
-    border-top: 1.5px solid rgba(0, 0, 0, 0.196);
-    border-bottom: 3px solid rgba(0, 0, 0, 0.196);
+  border-top: 1.5px solid rgba(0, 0, 0, 0.196);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.196);
 }
 
 th {
-    background-color: #f2f2f2;
-    font-weight: 700;
+  background-color: #f2f2f2;
+  font-weight: 700;
 }
 
 .columnsDetailsProduct {
-    display: flex;
-    margin-top: 20px;
+  display: flex;
+  margin-top: 20px;
 }
 
 .columnsDetailsProduct > div {
-    width: 50%;
+  width: 50%;
 }
 
 .productDetailContainer h3 {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 .productDetailContainer p {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .pictureProductContainer {
-    margin-top: 10px;
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    overflow-y: hidden ;
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .pictureProductContent {
-    height: 100px;
+  height: 100px;
 }
 
 .pictureProductContent img {
-    height: 100%;
+  height: 100%;
 }

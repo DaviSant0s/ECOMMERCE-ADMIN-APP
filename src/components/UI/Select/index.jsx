@@ -1,31 +1,24 @@
 import './styles.css';
-import ReactSelect from 'react-select'
+import ReactSelect from 'react-select';
 
-export default function Select({onChange, placeholder, options=[]}) {
-
+export default function Select({ onChange, placeholder, options = [] }) {
   return (
-    <div className='selectContainer'>
-      <ReactSelect 
-
+    <div className="selectContainer">
+      <ReactSelect
         options={[
-          {value:"", label: "Nenhum valor"},
-          ...options.map(option => ({value: option.value, label: option.name}))
+          { value: '', label: 'Nenhum valor' },
+          ...options.map((option) => ({ value: option.value, label: option.name })),
         ]}
-
         onChange={onChange}
-
-        className='reactSelect'
+        className="reactSelect"
         placeholder={placeholder}
-        
       />
     </div>
-  )
+  );
 }
 
-
-
-
-{/*{label && <label htmlFor={id}>{label}</label>}
+{
+  /*{label && <label htmlFor={id}>{label}</label>}
 
 <select id={id} name={id} onChange={onChange}>
   <option value="">{placeholder}</option>
@@ -39,4 +32,5 @@ export default function Select({onChange, placeholder, options=[]}) {
       </option>
   ))}
 
-  </select>*/}
+  </select>*/
+}

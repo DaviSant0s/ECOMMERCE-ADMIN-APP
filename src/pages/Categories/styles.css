@@ -1,65 +1,65 @@
 .categories-container {
-    width: 100%;
-    height: 100%;
-    padding-left: 2em;
-    padding-right: 2em;
+  width: 100%;
+  height: 100%;
+  padding-left: 2em;
+  padding-right: 2em;
 
-    overflow: auto;
+  overflow: auto;
 }
 
 .title-category-and-add-button {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .title-category-and-add-button > h1 {
-    font-weight: 600;
-    font-size: 2em
+  font-weight: 600;
+  font-size: 2em;
 }
 
 .add-category-btn {
-    width: 100px;
-    cursor: pointer;
+  width: 100px;
+  cursor: pointer;
 }
 
 .categories-container ul {
-    padding-left: 1.5em;
-    font-size: 20px;
+  padding-left: 1.5em;
+  font-size: 20px;
 }
 
 .input-container-category-add {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 30px;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+  margin-top: 20px;
 }
 
 .btn-save-container-modal-category {
-    display: flex;
-    justify-content: end;
+  display: flex;
+  justify-content: end;
 }
 
 .inputs-categories-modal {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .inputs-categories-modal > span {
-    display: block;
-    margin-bottom: 8px;
+  display: block;
+  margin-bottom: 8px;
 }
 
 .rows-categories-modal {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .confirm-cancel-delete-title-list {
-    width: 100%;
-    font-weight: 700;
-    font-size: 1.05em;
-    margin-bottom: 5px;
-    margin-top: 3px;
+  width: 100%;
+  font-weight: 700;
+  font-size: 1.05em;
+  margin-bottom: 5px;
+  margin-top: 3px;
 }

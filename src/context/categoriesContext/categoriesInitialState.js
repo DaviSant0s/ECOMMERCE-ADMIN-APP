@@ -1,7 +1,5 @@
 export const categoriesInitialState = {
-
-    categories: [],
-    loading: false,
-    error: null,
-    
-}
+  categories: [],
+  loading: false,
+  error: null,
+};

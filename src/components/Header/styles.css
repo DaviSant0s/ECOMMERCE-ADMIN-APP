@@ -1,34 +1,36 @@
 .headerContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-    width: 100%;
-    height: var(--heightHeader); 
-    padding: 0 45px 0 45px;
+  width: 100%;
+  height: var(--heightHeader);
+  padding: 0 45px 0 45px;
 
-    background-color: var(--headerBackgroundColor);
+  background-color: var(--headerBackgroundColor);
 
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 
-.link-brand, .link{
-    font-weight: 600;
-    color: var(--headerColor);
-    text-decoration: none; 
+.link-brand,
+.link {
+  font-weight: 600;
+  color: var(--headerColor);
+  text-decoration: none;
 }
 
-.link, .signout-btn {
-    color: rgb(149, 149, 149);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.1s ease-in-out;
+.link,
+.signout-btn {
+  color: rgb(149, 149, 149);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
 }
 
-.link:hover, .signout-btn:hover{
-    color: var(--headerColor);
+.link:hover,
+.signout-btn:hover {
+  color: var(--headerColor);
 }
 
-.signin-signup-btn-container{
-    
+.signin-signup-btn-container {
 }

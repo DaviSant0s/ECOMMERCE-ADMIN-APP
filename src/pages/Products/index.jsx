@@ -1,5 +1,5 @@
 import './styles.css';
-import Layout from '../../components/Layout'
+import Layout from '../../components/Layout';
 import Modal from '../../components/UI/Modal';
 import Button from '../../components/UI/Button';
 import { useProducts } from '../../context/productsContext/productsProvider';
@@ -9,27 +9,26 @@ import { createProducts } from '../../api/productsApi';
 import { generatePublicUrl } from '../../../urlConfig';
 
 export default function Products() {
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isProductDeailsModalOpen, setIsProductDeailsModalOpen] = useState(false);
-  
+  const [isProductDeailsModalOpen, setIsProductDeailsModalOpen] =
+    useState(false);
+
   const [productName, setproductName] = useState('');
   const [productQuantity, setProductQuantity] = useState('');
   const [productPrice, setProductPrice] = useState('');
   const [productDescription, setProductDescription] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [productPictures, setProductPictures] = useState([]);
-  
+
   const [productDetails, setProductDetails] = useState(null);
-  
+
   const { productState, productDispatch } = useProducts();
   const { categoryState } = useCategories();
-  
-  console.log('produtos', productState)
-  console.log('produtos detalhes', productDetails)
+
+  console.log('produtos', productState);
+  console.log('produtos detalhes', productDetails);
 
   const createProduct = (e) => {
-
     e.preventDefault();
 
     const form = new FormData();
@@ -39,7 +38,7 @@ export default function Products() {
     form.append('price', productPrice);
     form.append('description', productDescription);
     form.append('category', categoryId);
-    
+
     for (let picture of productPictures) {
       form.append('productPicture', picture);
     }
@@ -47,38 +46,26 @@ export default function Products() {
     createProducts(form, productDispatch);
 
     setIsModalOpen(false);
-
-  }
+  };
 
   const createCategoriesList = (categories, options = []) => {
+    categories.map((category) => {
+      options.push({ name: category.name, value: category.id });
 
-    categories.map(category => {
-
-        options.push(
-          {name: category.name, value: category.id}
-        );
-
-        if (category.children.length > 0){
-          createCategoriesList(category.children, options)
-        }
-
+      if (category.children.length > 0) {
+        createCategoriesList(category.children, options);
+      }
     });
 
     return options;
-
-  }
+  };
 
   const handleProductPicture = (e) => {
-    setProductPictures([
-      ...productPictures,
-      e.target.files[0]
-    ]);
-  }
-
+    setProductPictures([...productPictures, e.target.files[0]]);
+  };
 
   useEffect(() => {
-
-    if(!isModalOpen){
+    if (!isModalOpen) {
       setproductName('');
       setProductQuantity('');
       setProductPrice('');
@@ -86,14 +73,12 @@ export default function Products() {
       setCategoryId('');
       setProductPictures([]);
     }
+  }, [isModalOpen]);
 
-  }, [isModalOpen])
-
-  
   const setIsProductDeailsModal = (product) => {
     setProductDetails(product);
     setIsProductDeailsModalOpen(true);
-  }
+  };
 
   const renderProducts = (products) => {
     return products.map((product, index) => (
@@ -104,63 +89,80 @@ export default function Products() {
         <td>{product.quantity}</td>
         <td>{product.Category.name}</td>
       </tr>
-    ))
-  }
+    ));
+  };
 
   const renderAddProductModal = () => (
-
-    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title='Adicionar um novo Produto'>
-
+    <Modal
+      isOpen={isModalOpen}
+      onClose={() => setIsModalOpen(false)}
+      title="Adicionar um novo Produto"
+    >
       <div className="input-container-product-add">
+        <input
+          onChange={(e) => setproductName(e.target.value)}
+          type="text"
+          className="input-product"
+          placeholder="Nome do produto"
+        />
+        <input
+          onChange={(e) => setProductQuantity(e.target.value)}
+          type="text"
+          className="input-product"
+          placeholder="Quantidade"
+        />
+        <input
+          onChange={(e) => setProductPrice(e.target.value)}
+          type="text"
+          className="input-product"
+          placeholder="Preço"
+        />
+        <textarea
+          onChange={(e) => setProductDescription(e.target.value)}
+          type="text"
+          className="input-product"
+          placeholder="Descrição"
+        />
 
-        <input onChange={e => setproductName(e.target.value)} type="text" className='input-product' placeholder='Nome do produto' />
-        <input onChange={e => setProductQuantity(e.target.value)} type="text" className='input-product' placeholder='Quantidade' />
-        <input onChange={e => setProductPrice(e.target.value)} type="text" className='input-product' placeholder='Preço' />
-        <textarea onChange={e => setProductDescription(e.target.value)} type="text" className='input-product' placeholder='Descrição' />
-
-        <select onChange={e => setCategoryId(e.target.value)}>
+        <select onChange={(e) => setCategoryId(e.target.value)}>
           <option value="">Selecione a categoria</option>
 
-          {createCategoriesList(categoryState.categories).map(category => (
-            <option key={category.value} value={category.value}>{category.name}</option>
+          {createCategoriesList(categoryState.categories).map((category) => (
+            <option key={category.value} value={category.value}>
+              {category.name}
+            </option>
           ))}
-
         </select>
 
-          {productPictures.length > 0 && productPictures.map((picture, index) => (
+        {productPictures.length > 0 &&
+          productPictures.map((picture, index) => (
             <p key={index}>{picture.name}</p>
           ))}
 
-        <input type="file" name="productPicture" onChange={handleProductPicture} />
-
+        <input
+          type="file"
+          name="productPicture"
+          onChange={handleProductPicture}
+        />
       </div>
 
-      <div className='btn-save-container-modal-product'>
-
-        <Button onClick={createProduct}>
-          Salvar
-        </Button>
-
+      <div className="btn-save-container-modal-product">
+        <Button onClick={createProduct}>Salvar</Button>
       </div>
-
     </Modal>
-
   );
 
   const renderShowProductDetailsModal = () => {
-
-    if( !productDetails ) null;
+    if (!productDetails) null;
 
     return (
-
-      <Modal 
-        isOpen={isProductDeailsModalOpen} 
-        onClose={() => setIsProductDeailsModalOpen(false)} 
+      <Modal
+        isOpen={isProductDeailsModalOpen}
+        onClose={() => setIsProductDeailsModalOpen(false)}
         title={'Detalhes do produto'}
       >
-
-        <div className='productDetailContainer'>
-          <div className='columnsDetailsProduct'>
+        <div className="productDetailContainer">
+          <div className="columnsDetailsProduct">
             <div>
               <h3>Nome</h3>
               <p>{productDetails.name}</p>
@@ -178,35 +180,27 @@ export default function Products() {
           <p>{productDetails.description}</p>
 
           <h3>Imagens do produto</h3>
-          <div className='pictureProductContainer'>
+          <div className="pictureProductContainer">
             {productDetails.Pictures.map((picture, index) => (
-              <div className='pictureProductContent' key={index}>
+              <div className="pictureProductContent" key={index}>
                 <img src={picture.img} alt="" />
               </div>
             ))}
           </div>
-
         </div>
-
       </Modal>
     );
-  }
-
+  };
 
   return (
     <Layout sidebar={true}>
-
-      <div className='product-container'>
-
-        <div className='title-product-and-add-button'>
+      <div className="product-container">
+        <div className="title-product-and-add-button">
           <h1>Produtos</h1>
-          <Button onClick={() => setIsModalOpen(true)}>
-            Add
-          </Button>
+          <Button onClick={() => setIsModalOpen(true)}>Add</Button>
         </div>
 
-        <div className='table-container'>
-
+        <div className="table-container">
           <table>
             <thead>
               <tr>
@@ -217,18 +211,13 @@ export default function Products() {
                 <th>Categoria</th>
               </tr>
             </thead>
-            <tbody>
-              {renderProducts(productState.products)}
-            </tbody>
+            <tbody>{renderProducts(productState.products)}</tbody>
           </table>
-          
         </div>
-
       </div>
 
       {renderAddProductModal()}
       {productDetails && renderShowProductDetailsModal()}
-
     </Layout>
-  )
+  );
 }
