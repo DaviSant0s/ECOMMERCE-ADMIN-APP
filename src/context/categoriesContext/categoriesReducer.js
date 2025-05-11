@@ -76,6 +76,28 @@ export const categoriesReducer = (state, action) => {
         loading: false,
         error: action.payload.error,
       };
+    
+    // delete
+
+    case categoriesTypes.DELETE_CATEGORIES_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+
+    case categoriesTypes.DELETE_CATEGORIES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+      };
+
+    case categoriesTypes.DELETE_CATEGORIES_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload.error,
+      };
 
     default:
       return state;

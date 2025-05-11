@@ -1,7 +1,7 @@
 import './styles.css';
 import Layout from '../../components/Layout';
 import { useState } from 'react';
-import { createCategories, updateCategories } from '../../api/categoriesApi';
+import { createCategories, updateCategories, deleteCategories } from '../../api/categoriesApi';
 import { useCategories } from '../../context/categoriesContext/categoriesProvider';
 import Modal from '../../components/UI/Modal';
 import Button from '../../components/UI/Button';
@@ -245,6 +245,7 @@ export default function Categories() {
     const checkedIdsArray = checkedArray.map((item) => ({ id: item.value }));
     const expandedIdsArray = expandedArray.map((item) => ({ id: item.value }));
     const idsArray = expandedIdsArray.concat(checkedIdsArray);
+    deleteCategories(idsArray, categoryDispatch)
 
     console.log(checkedIdsArray);
     console.log(expandedIdsArray);
