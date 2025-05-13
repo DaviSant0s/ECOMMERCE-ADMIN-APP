@@ -58,16 +58,14 @@ export const deleteCategories = async (ids, dispatch) => {
   dispatch({ type: categoriesTypes.DELETE_CATEGORIES_REQUEST });
   
   try {
-    const data = await postRequest('http://localhost:3000/api/category/deleteCategories', ids);
+    
+    await postRequest('http://localhost:3000/api/category/deleteCategories', { ids });
     
     dispatch({ type: categoriesTypes.DELETE_CATEGORIES_SUCCESS });
-
-    console.log(data)
     
     getAllCategories(dispatch);
 
   } catch (error) {
-    console.log('davi');
     dispatch({
       type: categoriesTypes.DELETE_CATEGORIES_FAILURE,
       payload: { error: error.message },
