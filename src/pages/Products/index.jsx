@@ -25,8 +25,8 @@ export default function Products() {
   const { productState, productDispatch } = useProducts();
   const { categoryState } = useCategories();
 
-  console.log('produtos', productState);
-  console.log('produtos detalhes', productDetails);
+  // console.log('produtos', productState);
+  // console.log('produtos detalhes', productDetails);
 
   const createProduct = (e) => {
     e.preventDefault();
@@ -87,7 +87,7 @@ export default function Products() {
         <td>{product.name}</td>
         <td>{product.price}</td>
         <td>{product.quantity}</td>
-        <td>{product.Category.name}</td>
+        <td>{product.Category && product.Category.name || 'Sem categoria'}</td>
       </tr>
     ));
   };
@@ -173,7 +173,7 @@ export default function Products() {
               <h3>Preço</h3>
               <p>{productDetails.price}</p>
               <h3>Categoria</h3>
-              <p>{productDetails.Category.name}</p>
+              <p>{productDetails.Category && productDetails.Category.name || 'Sem categoria'}</p>
             </div>
           </div>
           <h3>Descrição</h3>
